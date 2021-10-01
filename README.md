@@ -4,6 +4,8 @@ Tidak semua masalah dalam matematika dan sains dapat diselesaikan secara analiti
 
 Metode numerik memfokuskan pada teknik-teknik untuk menyelesaikan berbagai permasalahan matematika secara numerik, menganalisis kekonvergenan dan kestabilan dari tiap-tiap metode yang dipelajari.
 
+Modul ini dilengkapi dengan contoh-contoh kasus di dunia nyata yang diimplementasikan ke dalam bahasa Python.
+
 ## Tujuan
 Modul ini diharapkan dapat membantu siapa saja untuk menyelesaikan dan menemukan solusi numerik dalam model matematika sederhana, serta dapat menganalisis error dan kekonvergenan dari setiap metode numerik yang dihasilkan dari solusi tersebut, sehingga kita dapat memilih metode mana yang sesuai untuk menyelesaikan masalah-masalah pemodelan matematika sederhana.
 
