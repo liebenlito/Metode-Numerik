@@ -18,3 +18,5 @@ Modul ini diharapkan dapat membantu siapa saja untuk menyelesaikan dan menemukan
 6. Turunan Numerik
 7. Integrasi secara Numerik
 8. Persamaan Differensial Biasa pada Masalah Nilai Awal
+9. Persamaan Differensial Biasa pada Masalah Syarat Batas
+10. Persmaan Differensial Parsial 
