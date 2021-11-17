@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Faktorisasi Matriks &#8212; Metode Numerik dengan Python</title>
+    <title>Dekomposisi Matriks &#8212; Metode Numerik dengan Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -114,7 +114,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Faktorisasi Matriks
+   Dekomposisi Matriks
   </a>
  </li>
  <li class="toctree-l1">
@@ -229,6 +229,23 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/liebenlito/Metode-Numerik/master?urlpath=tree/docs/notebooks/Faktorisasi_Matriks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -240,8 +257,8 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#faktorisasi-lu">
-   Faktorisasi LU
+  <a class="reference internal nav-link" href="#dekomposisi-lu">
+   Dekomposisi LU
   </a>
  </li>
 </ul>
@@ -255,22 +272,22 @@
         
               <div>
                 
-  <div class="section" id="faktorisasi-matriks">
-<h1>Faktorisasi Matriks<a class="headerlink" href="#faktorisasi-matriks" title="Permalink to this headline">¶</a></h1>
-<p>Pada prinsipnya Eliminasi Gauss adalah teknik yang secara umum digunakan untuk menyelesaikan Sistem Persamaan Linear (SPL). Namun, waktu komputasi yang dibutuhkan oleh Eliminasi Gauss cenderung lama seiring bertambahnya ukuran matriks atau dapat dinotasikan <span class="math notranslate nohighlight">\(O(n^3 /3)\)</span> <span id="id1">[<a class="reference internal" href="../references.html#id2">Burden and Faires, 2010</a>]</span>. Hal ini banyak dipengaruhi oleh operasi aritmatika dari proses eliminasi yang terjadi di dalam Eliminasi Gauss. Dengan demikian, kita memerlukan suatu cara agar dapat meminimalkan waktu komputasi, salah satunya dengan melakukan <strong>faktorisasi matriks</strong>.</p>
-<div class="section" id="faktorisasi-lu">
-<h2>Faktorisasi LU<a class="headerlink" href="#faktorisasi-lu" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="dekomposisi-matriks">
+<h1>Dekomposisi Matriks<a class="headerlink" href="#dekomposisi-matriks" title="Permalink to this headline">¶</a></h1>
+<p>Pada prinsipnya Eliminasi Gauss adalah teknik yang secara umum digunakan untuk menyelesaikan Sistem Persamaan Linear (SPL). Namun, waktu komputasi yang dibutuhkan oleh Eliminasi Gauss cenderung lama seiring bertambahnya ukuran matriks atau dapat dinotasikan <span class="math notranslate nohighlight">\(O(n^3 /3)\)</span> <span id="id1">[<a class="reference internal" href="../references.html#id2">Burden and Faires, 2010</a>]</span>. Hal ini banyak dipengaruhi oleh operasi aritmatika dari proses eliminasi yang terjadi di dalam Eliminasi Gauss. Dengan demikian, kita memerlukan suatu cara agar dapat meminimalkan waktu komputasi, salah satunya dengan melakukan <strong>dekomposisi matriks</strong>.</p>
+<div class="section" id="dekomposisi-lu">
+<h2>Dekomposisi LU<a class="headerlink" href="#dekomposisi-lu" title="Permalink to this headline">¶</a></h2>
 <p>Diberikan suatu SPL yang dapat dibentuk dalam bentuk matriks-vektor sebagai berikut</p>
 <div class="math notranslate nohighlight">
 \[
 A\vec{x} = \vec{b}
 \]</div>
-<p>dimana <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> dan <span class="math notranslate nohighlight">\(\vec{x}, \vec{b} \in \mathbb{R}^n\)</span>. Kemudian untuk menyelesaikan SPL tersebut, kita gunakan eliminasi Gauss tanpa pivoting dan kita asumsikan juga bahwa elemen pivot di <span class="math notranslate nohighlight">\(A\)</span> tak nol seiring berjalannya proses eliminasi pada setiap iterasinya, atau dapat ditulis <span class="math notranslate nohighlight">\(a_{ii}^{(k)}\)</span>, untuk <span class="math notranslate nohighlight">\(k = 1,2, ..., n-1\)</span> dan <span class="math notranslate nohighlight">\(i = 1,2,...,n\)</span>. Proses eliminasi pada iterasi pertama dilakukan dengan cara</p>
+<p>dimana <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> dan <span class="math notranslate nohighlight">\(\vec{x}, \vec{b} \in \mathbb{R}^n\)</span>. Kemudian untuk menyelesaikan SPL tersebut, kita gunakan eliminasi Gauss tanpa pivoting dan kita asumsikan juga bahwa elemen pivot di <span class="math notranslate nohighlight">\(A\)</span> tak nol seiring berjalannya proses eliminasi pada setiap iterasinya, atau dapat ditulis <span class="math notranslate nohighlight">\(a_{ii}^{(k)}\)</span>, untuk <span class="math notranslate nohighlight">\(k = 1,2, ..., n\)</span> dan <span class="math notranslate nohighlight">\(i = 1,2,...,n\)</span>. Proses eliminasi pada iterasi pertama dilakukan dengan cara</p>
 <div class="math notranslate nohighlight">
 \[
 (E_j - m_{j1}E_1) \rightarrow (E_j), \hspace{1.5em} m_{j1} = \frac{a_{j1}^{(1)}}{a_{11}^{(1)}}
 \]</div>
-<p>atau proses ini dapat direpresentasikan sebagai matriks</p>
+<p>atau operasi ini dapat direpresentasikan sebagai <strong>matriks transformasi Gaussian pertama</strong></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 M^{(1)} = 
@@ -281,7 +298,161 @@ M^{(1)} =
 -m_{n1} &amp; 0 &amp; \cdots &amp; 1 \\
 \end{bmatrix}
 \end{split}\]</div>
-<p>Proses eliminasi ini dapat juga dipandang sebagai operasi perkalian matriks antara</p>
+<p>Sehingga, hasil perkalian matriks antara <span class="math notranslate nohighlight">\(M^{(1)}\)</span> dan <span class="math notranslate nohighlight">\(A^{(1)}\)</span> adalah</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(2)}\vec{x} = M^{(1)}A\vec{x} = M^{(1)} \vec{b} = \vec{b}^{(2)}.
+\]</div>
+<p>Secara umum, ketika kita melakukan perkalian matriks A dengan matriks transformasi Gaussian pada iterasi ke <span class="math notranslate nohighlight">\(k\)</span> akan menghasilkan</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(k+1)} \vec{x} = M^{(k)} A^{(k)} \vec{x} = M^{(k)} \cdots M^{(1)} A \vec{x} = M^{(k)}\vec{b}^{(k)} = \vec{b}^{(k+1)} = M^{(k)} \cdots M^{(1)} \vec{b}.
+\]</div>
+<p>Proses ini akan berhenti pada <span class="math notranslate nohighlight">\(A^{(n)} \vec{x} = \vec{b}^{(n)}\)</span>, dimana <span class="math notranslate nohighlight">\(A^{(n)}\)</span> menjadi matriks segitiga atas</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A^{(n)} = 
+\begin{bmatrix}
+a_{11}^{(1)} &amp; a_{12}^{(1)} &amp; \cdots &amp; a_{1n}^{(1)} \\
+0            &amp; a_{22}^{(2)} &amp;        &amp; a_{2n}^{(2)} \\
+\vdots       &amp;   &amp; \ddots &amp; \vdots \\
+0            &amp; 0 &amp; \cdots &amp; a_{nn}^{(n)} \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>diberikan oleh</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(n)} = M^{(n-1)} M^{(n-1)} \cdots M^{(1)} A.
+\]</div>
+<p>Kemudian kita panggil kembali</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(k+1)} \vec{x} = M^{(k)} A^{(k)} \vec{x} = M^{(k)} \cdots M^{(1)} A \vec{x} = M^{(k)}\vec{b}^{(k)} = \vec{b}^{(k+1)}
+\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(M^{(k)}\)</span> dihasilkan dari operasi baris</p>
+<div class="math notranslate nohighlight">
+\[
+(E_j - m_{jk}E_k) \rightarrow (E_j), \hspace{1.5em} j=k+1, \cdots, n.
+\]</div>
+<p>Jika kita ingin mengembalikan nilai dari matriks <span class="math notranslate nohighlight">\(A^{(k+1)} ke A^{(k)}\)</span>, maka kita perlu operasi balikan</p>
+<div class="math notranslate nohighlight">
+\[
+(E_j + m_{jk}E_k) \rightarrow (E_j), \hspace{1.5em} j=k+1, \cdots, n,
+\]</div>
+<p>berarti ini sama saja mencari invers dari matriks <span class="math notranslate nohighlight">\(M\)</span>, <span class="math notranslate nohighlight">\([M^{(k)}]^{-1}\)</span>. Dengan demikian, jika kita teruskan operasi invers ini sampai dengan iterasi pertama, maka akan menghasilkan matriks <span class="math notranslate nohighlight">\(A\)</span>, dan operasi invers dari matriks <span class="math notranslate nohighlight">\(M\)</span> dapat kita tuliskan ekivalen dengan matriks segitiga bawah <span class="math notranslate nohighlight">\(L\)</span> atau dapat ditulis</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L = L^{(1)} L^{(2)} \cdots L^{(n-1)} = 
+\begin{bmatrix}
+1       &amp; 0 &amp; \cdots &amp; 0 \\
+m_{21} &amp; 1 &amp;        &amp; 0 \\
+\vdots  &amp;   &amp; \ddots &amp; \vdots \\
+m_{n1} &amp; \cdots &amp; m_{n,n-1} &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Jadi, <span class="math notranslate nohighlight">\(A\)</span> dapat kita dekomposisi menjadi hasil kali dari matriks segitiga bawah <span class="math notranslate nohighlight">\(L\)</span> dan matriks segitiga atas <span class="math notranslate nohighlight">\(U\)</span>, atau dapat ditulis</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{lll}
+LU &amp;=&amp; L^{(1)}L^{(2)} \cdots L^{(n-3)} L^{(n-2)} L^{(n-1)} . M^{(n-1)} M^{(n-2)} M^{(n-3)} \cdots M^{(2)} M^{(1)} A \\
+&amp;=&amp; [M^{(1)}]^{-1} [M^{(2)}]^{-1} \cdots [M^{(n-2)}]^{-1} [M^{(n-1)}]^{-1} . M^{(n-1)} M^{(n-2)} M^{(n-3)} \cdots M^{(2)} M^{(1)} A \\
+&amp;=&amp; A.
+\end{array}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">faktorisasiLU</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">faktor</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">faktor</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">faktor</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="n">U</span> <span class="o">=</span> <span class="n">A</span>
+    
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span><span class="n">U</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">subtitusi_maju</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">L_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+
+    <span class="c1"># Lakukan subtitutsi mundur</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,:</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">i</span><span class="p">]))</span> <span class="o">/</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">subtitusi_mundur</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    
+    <span class="c1"># Lakukan subtitutsi mundur</span>
+    <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">U</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">:]))</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">faktorisasiLU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">subtitusi_maju</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subtitusi_mundur</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.,  2.,  0.,  1.])
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
