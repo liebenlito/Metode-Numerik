@@ -359,6 +359,29 @@ LU &amp;=&amp; L^{(1)}L^{(2)} \cdots L^{(n-3)} L^{(n-2)} L^{(n-1)} . M^{(n-1)} M
 &amp;=&amp; A.
 \end{array}
 \end{split}\]</div>
+<div class="admonition-teorema admonition">
+<p class="admonition-title">Teorema</p>
+<p>Jika Eliminasi Gauss tanpa penukaran baris dapat digunakan untuk menyelesaikan <span class="math notranslate nohighlight">\(A\vec{x} = \vec{b}\)</span>, maka matriks <span class="math notranslate nohighlight">\(A\)</span> dapat didekomposisi ke dalam perkalian matriks antara matriks segitiga bawah <span class="math notranslate nohighlight">\(L\)</span> dan matriks segitiga atas <span class="math notranslate nohighlight">\(U\)</span>, <span class="math notranslate nohighlight">\(A = LU\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+U = 
+\begin{bmatrix}
+a_{11}^{(1)} &amp; a_{12}^{(1)} &amp; \cdots &amp; a_{1n}^{(1)} \\
+0            &amp; a_{22}^{(2)} &amp;        &amp; a_{2n}^{(2)} \\
+\vdots       &amp;   &amp; \ddots &amp; \vdots \\
+0            &amp; 0 &amp; \cdots &amp; a_{nn}^{(n)} \\
+\end{bmatrix}
+, L = 
+\begin{bmatrix}
+1       &amp; 0 &amp; \cdots &amp; 0 \\
+m_{21} &amp; 1 &amp;        &amp; 0 \\
+\vdots  &amp;   &amp; \ddots &amp; \vdots \\
+m_{n1} &amp; \cdots &amp; m_{n,n-1} &amp; 1 \\
+\end{bmatrix}
+,
+\end{split}\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(m_{ji} = \frac{a_{ji}^{(i)}}{a_{ii}^{(i)}}\)</span>, untuk <span class="math notranslate nohighlight">\(i,j = 1,2,\cdots, n\)</span>.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
