@@ -803,11 +803,11 @@ $<span class="math notranslate nohighlight">\(
     -inf	      -inf	       nan	
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4284/3427404320.py:1: RuntimeWarning: overflow encountered in exp
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3649/3427404320.py:1: RuntimeWarning: overflow encountered in exp
   g = lambda x: np.exp(-2*x) * (x-1) + x
-/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4284/1089591089.py:7: RuntimeWarning: invalid value encountered in double_scalars
+/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3649/1089591089.py:7: RuntimeWarning: invalid value encountered in double_scalars
   if (np.abs(p-p0) &lt; epsilon):
-/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4284/1089591089.py:9: RuntimeWarning: invalid value encountered in double_scalars
+/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3649/1089591089.py:9: RuntimeWarning: invalid value encountered in double_scalars
   print(&#39;{:8.4f}\t{:10.4f}\t{:10.4f}\t&#39;.format(p, g(p), np.abs(p-p0)))
 </pre></div>
 </div>
@@ -1048,12 +1048,12 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">d8</span><span class="o">/</span><span class="n">_nrt2sy9567f87n08gxx0xc00000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_4284</span><span class="o">/</span><span class="mf">3585757220.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">d8</span><span class="o">/</span><span class="n">_nrt2sy9567f87n08gxx0xc00000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_3649</span><span class="o">/</span><span class="mf">3585757220.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">g5</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> 
 <span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="nn">/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4284/1089591089.py</span> in <span class="ni">iterasi_fixed_point</span><span class="nt">(func, p0, N, epsilon)</span>
+<span class="nn">/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3649/1089591089.py</span> in <span class="ni">iterasi_fixed_point</span><span class="nt">(func, p0, N, epsilon)</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="k">break</span>
 <span class="ne">----&gt; </span><span class="mi">9</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)))</span>
