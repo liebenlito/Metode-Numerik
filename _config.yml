@@ -3,7 +3,7 @@
 
 title: Metode Numerik dengan Python 
 author: Muhaza Liebenlito
-logo: logo.png
+logo: images/logo.png
 exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 
 # Force re-execution of notebooks on each build.
