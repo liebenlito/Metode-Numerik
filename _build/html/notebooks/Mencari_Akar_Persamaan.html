@@ -1,0 +1,1420 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mencari Akar Persamaan Non-Linear Satu Variabel &#8212; Metode Numerik dengan Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Solusi Numerik untuk Sistem Persamaan Linear" href="Solusi_dari_SPL.html" />
+    <link rel="prev" title="Sistem Floating-Point" href="Bilangan_Floating_Point.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Metode Numerik dengan Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Metode Numerik
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Bilangan_Floating_Point.html">
+   Sistem Floating-Point
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Mencari Akar Persamaan Non-Linear Satu Variabel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Solusi_dari_SPL.html">
+   Solusi Numerik untuk Sistem Persamaan Linear
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Faktorisasi_Matriks.html">
+   Dekomposisi Matriks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Metode_Iteratif_untuk_Menyelesaikan_SPL.html">
+   Metode Iteratif untuk Menyelesaikan Sistem Persamaan Linear
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interpolasi_%28spline%29.html">
+   Masalah di Interpolasi Polinomial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Metode_Deret_Taylor.html">
+   Solusi Numerik Persamaan Differensial Biasa
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Runge-Kutta.html">
+   Metode Runge-Kutta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="RK4_SPD.html">
+   Sistem Persamaan Differensial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="model_SIR.html">
+   Model SIR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   Referensi
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/Mencari_Akar_Persamaan.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/liebenlito/Metode-Numerik"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/liebenlito/Metode-Numerik/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Mencari_Akar_Persamaan.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/liebenlito/Metode-Numerik/master?urlpath=tree/docs/notebooks/Mencari_Akar_Persamaan.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metode-bisection">
+   Metode Bisection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-metode-bisection">
+     Analisis Kekonvergenan Metode Bisection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterasi-fixed-point">
+   Iterasi Fixed Point
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contoh-1">
+     Contoh 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contoh-2">
+     Contoh 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-iterasi-fixed-point">
+     Analisis Kekonvergenan Iterasi Fixed Point
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contoh-3">
+     Contoh 3:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metode-newton">
+   Metode Newton
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementasi-metode-newton">
+     Implementasi Metode Newton
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-metode-newton">
+     Analisis Kekonvergenan Metode Newton
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metode-secant">
+   Metode Secant
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementasi-metode-secant">
+     Implementasi Metode Secant
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-metode-secant">
+     Analisis Kekonvergenan Metode Secant
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="mencari-akar-persamaan-non-linear-satu-variabel">
+<h1>Mencari Akar Persamaan Non-Linear Satu Variabel<a class="headerlink" href="#mencari-akar-persamaan-non-linear-satu-variabel" title="Permalink to this headline">¶</a></h1>
+<p>Diberikan suatu fungsi bernilai real dan nonlinear <span class="math notranslate nohighlight">\(f(x)\)</span>. Cari suatu akar <span class="math notranslate nohighlight">\(p\)</span> dari <span class="math notranslate nohighlight">\(f(x)\)</span> sedemikian sehingga <span class="math notranslate nohighlight">\(f(p)=0\)</span>.</p>
+<p><strong>Contoh 1</strong>: Polinomial kuadratik: <span class="math notranslate nohighlight">\(f(x)=x^2+5x+6\)</span>.
+<span class="math notranslate nohighlight">\(𝑓(x)=(x+2)(x+3)=0⇒p_1=−2, p_2=−3\)</span>.</p>
+<p><strong>Contoh 2</strong>: <span class="math notranslate nohighlight">\(f(x)=x^2+4x+10=(x+2)^2+6\)</span>.
+Tidak ada akar <span class="math notranslate nohighlight">\(𝑝\)</span> bernilai real yang memenuhi <span class="math notranslate nohighlight">\(f(p)=0\)</span>.</p>
+<p><strong>Contoh 3</strong>: <span class="math notranslate nohighlight">\(f(x)=x^2+\cos⁡{x}+e^x+\sqrt{x+1}\)</span>.
+Akar bisa saja sulit untuk ditemukan secara analitik.</p>
+<p><strong>Fokus</strong>: menggunakan metode numerik untuk mengaproksimasi akar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="metode-bisection">
+<h2>Metode Bisection<a class="headerlink" href="#metode-bisection" title="Permalink to this headline">¶</a></h2>
+<p>Diberikan <span class="math notranslate nohighlight">\(f(x)\)</span> kontinu di interval <span class="math notranslate nohighlight">\([a,b]\)</span> dengan <span class="math notranslate nohighlight">\(f(a)\)</span> dan <span class="math notranslate nohighlight">\(f(b)\)</span> memiliki tanda yang berlawanan.
+Tujuan: Cari <span class="math notranslate nohighlight">\(a,b\)</span> sedemikian sehingga <span class="math notranslate nohighlight">\(f(a).f(b)&lt;0\)</span>. Ini berarti terdapat akar <span class="math notranslate nohighlight">\(p∈(a,b)\)</span> sedemikian sehingga <span class="math notranslate nohighlight">\(f(r)=0\)</span>.</p>
+<p>Misalkan <span class="math notranslate nohighlight">\(c=(a+b)/2\)</span>, titik tengah.
+Jika <span class="math notranslate nohighlight">\(f(c)=0\)</span>, selesai.
+Jika tidak, periksa jika <span class="math notranslate nohighlight">\(f(c).f(c)&lt;0\)</span> atau <span class="math notranslate nohighlight">\(f(c).f(c)&lt;0\)</span>.
+Pilih interval <span class="math notranslate nohighlight">\([a,c]\)</span> atau <span class="math notranslate nohighlight">\([c,b]\)</span>, dan ulangi prosedur ini sampai memenuhi kriteria pemberhentian.</p>
+<p>Kriteria Pemberhentian:</p>
+<ul class="simple">
+<li><p>Interval cukup kecil</p></li>
+<li><p><span class="math notranslate nohighlight">\(|f(c_n )|\)</span> hampir <span class="math notranslate nohighlight">\(0\)</span></p></li>
+<li><p>Sudah mencapai iterasi maksimum</p></li>
+<li><p>Kombinasi dari yang di atas.</p></li>
+</ul>
+<p><strong>Contoh 1</strong>:</p>
+<p>Diberikan <span class="math notranslate nohighlight">\(f(x) = x^3 + 4x^2 - 10\)</span>. Cari akar dari <span class="math notranslate nohighlight">\(f(x)\)</span> di interval <span class="math notranslate nohighlight">\([1,2]\)</span> menggunakan metode Bisection dengan <span class="math notranslate nohighlight">\(\varepsilon = 10^{-4}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fungsi</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">10.</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fungsi</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Mencari_Akar_Persamaan_4_0.png" src="../_images/Mencari_Akar_Persamaan_4_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bisection</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">func</span>
+    <span class="n">FA</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">FP</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iterasi </span><span class="si">{:2d}</span><span class="se">\t</span><span class="s2"> p = </span><span class="si">{:2.4f}</span><span class="se">\t</span><span class="s2"> f(p) = </span><span class="si">{:2.4f}</span><span class="se">\t</span><span class="s2"> a = </span><span class="si">{:2.4f}</span><span class="se">\t</span><span class="s2"> b = </span><span class="si">{:2.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">FP</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">FP</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">epsilon</span> <span class="ow">or</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">epsilon</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">FA</span><span class="o">*</span><span class="n">FP</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="p">:</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="n">p</span>
+                <span class="n">FA</span> <span class="o">=</span> <span class="n">FP</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">,</span><span class="n">FP</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">i</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span>
+<span class="n">hasil</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p = </span><span class="si">{}</span><span class="s2">, f(p) = </span><span class="si">{}</span><span class="s2">, a = </span><span class="si">{}</span><span class="s2">, b = </span><span class="si">{}</span><span class="s2">, Total iterasi = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hasil</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterasi  0	 p = 1.5000	 f(p) = 2.3750	 a = 1.0000	 b = 2.0000
+iterasi  1	 p = 1.2500	 f(p) = -1.7969	 a = 1.0000	 b = 1.5000
+iterasi  2	 p = 1.3750	 f(p) = 0.1621	 a = 1.2500	 b = 1.5000
+iterasi  3	 p = 1.3125	 f(p) = -0.8484	 a = 1.2500	 b = 1.3750
+iterasi  4	 p = 1.3438	 f(p) = -0.3510	 a = 1.3125	 b = 1.3750
+iterasi  5	 p = 1.3594	 f(p) = -0.0964	 a = 1.3438	 b = 1.3750
+iterasi  6	 p = 1.3672	 f(p) = 0.0324	 a = 1.3594	 b = 1.3750
+iterasi  7	 p = 1.3633	 f(p) = -0.0321	 a = 1.3594	 b = 1.3672
+iterasi  8	 p = 1.3652	 f(p) = 0.0001	 a = 1.3633	 b = 1.3672
+p = 1.365234375, f(p) = 7.202476263046265e-05, a = 1.36328125, b = 1.3671875, Total iterasi = 9
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Contoh 2</strong>:</p>
+<p>Diberikan <span class="math notranslate nohighlight">\(f(x) = x^2 + 4x - 4\)</span>. Cari akar dari <span class="math notranslate nohighlight">\(f(x)\)</span> di interval <span class="math notranslate nohighlight">\([0,5]\)</span> menggunakan metode Bisection dengan <span class="math notranslate nohighlight">\(\varepsilon = 10^{-4}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fungsi</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">4.</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fungsi</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Mencari_Akar_Persamaan_8_0.png" src="../_images/Mencari_Akar_Persamaan_8_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">4</span>
+<span class="n">hasil</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p = </span><span class="si">{}</span><span class="s2">, f(p) = </span><span class="si">{}</span><span class="s2">, a = </span><span class="si">{}</span><span class="s2">, b = </span><span class="si">{}</span><span class="s2">, Total iterasi = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hasil</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">hasil</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iterasi  0	 p = 2.5000	 f(p) = 12.2500	 a = 0.0000	 b = 5.0000
+iterasi  1	 p = 1.2500	 f(p) = 2.5625	 a = 0.0000	 b = 2.5000
+iterasi  2	 p = 0.6250	 f(p) = -1.1094	 a = 0.0000	 b = 1.2500
+iterasi  3	 p = 0.9375	 f(p) = 0.6289	 a = 0.6250	 b = 1.2500
+iterasi  4	 p = 0.7812	 f(p) = -0.2646	 a = 0.6250	 b = 0.9375
+iterasi  5	 p = 0.8594	 f(p) = 0.1760	 a = 0.7812	 b = 0.9375
+iterasi  6	 p = 0.8203	 f(p) = -0.0458	 a = 0.7812	 b = 0.8594
+iterasi  7	 p = 0.8398	 f(p) = 0.0647	 a = 0.8203	 b = 0.8594
+iterasi  8	 p = 0.8301	 f(p) = 0.0093	 a = 0.8203	 b = 0.8398
+iterasi  9	 p = 0.8252	 f(p) = -0.0183	 a = 0.8203	 b = 0.8301
+iterasi 10	 p = 0.8276	 f(p) = -0.0045	 a = 0.8252	 b = 0.8301
+iterasi 11	 p = 0.8264	 f(p) = -0.0114	 a = 0.8252	 b = 0.8276
+iterasi 12	 p = 0.8270	 f(p) = -0.0079	 a = 0.8264	 b = 0.8276
+iterasi 13	 p = 0.8267	 f(p) = -0.0096	 a = 0.8264	 b = 0.8270
+iterasi 14	 p = 0.8269	 f(p) = -0.0088	 a = 0.8267	 b = 0.8270
+iterasi 15	 p = 0.8268	 f(p) = -0.0092	 a = 0.8267	 b = 0.8269
+p = 0.8267974853515625, f(p) = -0.009215976810082793, a = 0.82672119140625, b = 0.826873779296875, Total iterasi = 16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="analisis-kekonvergenan-metode-bisection">
+<h3>Analisis Kekonvergenan Metode Bisection<a class="headerlink" href="#analisis-kekonvergenan-metode-bisection" title="Permalink to this headline">¶</a></h3>
+<p>Diberikan suatu fungsi nonlinear <span class="math notranslate nohighlight">\(f(x)\)</span> kontinu di <span class="math notranslate nohighlight">\([a,b]\)</span> dan <span class="math notranslate nohighlight">\(\text{sgn}(f(a)) \neq \text{sgn}(f(b))\)</span>. Kita misalkan <span class="math notranslate nohighlight">\(a_0 = a\)</span> dan <span class="math notranslate nohighlight">\(b_0=b\)</span> sebagai interval pada iterasi ke 0 dari metode bisection, sehingga terdapat <span class="math notranslate nohighlight">\(c_0 = \frac{a_0+b_0}{2}\)</span> adalah nilai tengah dari <span class="math notranslate nohighlight">\([a_0, b_0]\)</span>. Maka kita definisikan error untuk iterasi ke-0 dari metode bisection, yaitu:</p>
+<div class="math notranslate nohighlight">
+\[e_0 = |p-c_0| \leq \frac{b_0 - a_0}{2},\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(p\)</span> adalah akar dari <span class="math notranslate nohighlight">\(f(x)\)</span>. Kemudian kita tuliskan <span class="math notranslate nohighlight">\(c_n = \frac{a_n + b_n}{2}\)</span> adalah nilai tengah dari <span class="math notranslate nohighlight">\([a_n, b_n]\)</span> pada iterasi ke-<span class="math notranslate nohighlight">\(n\)</span>, maka error yang dihasilkannya adalah</p>
+<div class="math notranslate nohighlight">
+\[e_n = |p-c_n| \leq \frac{b_n - a_n}{2} = \frac{b_0 - a_0}{2}\cdot \frac{1}{2^n}.\]</div>
+<p>Jika diberikan toleransi error <span class="math notranslate nohighlight">\(\varepsilon \rightarrow 0\)</span>, maka haruslah <span class="math notranslate nohighlight">\(e_n \leq \varepsilon\)</span>. Sehingga</p>
+<div class="math notranslate nohighlight">
+\[e_n \leq \frac{b_0 - a_0}{2}\cdot \frac{1}{2^n} \leq \varepsilon.\]</div>
+<p>Jadi, iterasi minimum yang dibutuhkan metode bisection untuk konvergen ke solusi (akar) adalah</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[n \geq \frac{\log{(b-a)} - \log{2\varepsilon}}{\log{2}}.\]</div>
+</div></blockquote>
+<div class="admonition-iterasi-minimum-bisection admonition">
+<p class="admonition-title">Iterasi Minimum Bisection</p>
+<p>Jika diberikan <span class="math notranslate nohighlight">\(f(x)\)</span> kontinu di <span class="math notranslate nohighlight">\([a,b]\)</span> dan <span class="math notranslate nohighlight">\(\text{sgn}(f(a)) \neq \text{sgn}(f(b))\)</span>, maka iterasi minimum yang dibutuhkan oleh Metode Bisection untuk mendapatkan solusi adalah</p>
+<div class="math notranslate nohighlight">
+\[n \geq \frac{\log{(b-a)} - \log{2\varepsilon}}{\log{2}}.\]</div>
+</div>
+<p><strong>Contoh 3</strong></p>
+<p>Dari contoh 2, kita ingin melihat berapa iterasi minimum yang dibutuhkan metode bisection untuk mendapatkan akar/solusi menggunakan analisis kekonvergenan yang sudah dituliskan sebelumnya.</p>
+<p><strong>Jawaban</strong>:</p>
+<p><span class="math notranslate nohighlight">\(n \geq \frac{\log{(5-0)} - \log{2\cdot 10^{-4}}}{\log{2}}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\Rightarrow n \geq \frac{4.398}{0.301} = 14.611 \approx 14.\)</span></p>
+<p>Jadi iterasi minimum yang dibutuhkan adalah 14 iterasi.</p>
+</div>
+</div>
+<div class="section" id="iterasi-fixed-point">
+<h2>Iterasi Fixed Point<a class="headerlink" href="#iterasi-fixed-point" title="Permalink to this headline">¶</a></h2>
+<p><strong>Definisi</strong>: Suatu bilangan <span class="math notranslate nohighlight">\(p\)</span> adalah <strong>fixed point</strong> untuk suatu fungsi <span class="math notranslate nohighlight">\(g\)</span> jika <span class="math notranslate nohighlight">\(g(p) = p\)</span>. Diberikan suatu fungsi <span class="math notranslate nohighlight">\(f(x)\)</span> kontinu, untuk suatu <span class="math notranslate nohighlight">\(p\)</span> maka <span class="math notranslate nohighlight">\(f(p) = 0\)</span>. Kemudian kita definisikan fungsi <span class="math notranslate nohighlight">\(g\)</span> dan kita tuliskan
+$<span class="math notranslate nohighlight">\(
+\begin{array}{cc}
+  x = x + f(x) = g(x) &amp;  &amp; x=x-f(x)=g(x)
+\end{array}
+\)</span>$</p>
+<ul class="simple">
+<li><p>Terdapat akar <span class="math notranslate nohighlight">\(p = g(p)\)</span>, dimana <span class="math notranslate nohighlight">\(p\)</span> adalah fixed point. Kemudian dengan tebakan awal <span class="math notranslate nohighlight">\(x_0\)</span>, hitung <span class="math notranslate nohighlight">\(g(x_0)\)</span>, dan harapannya untuk setiap iterasi <span class="math notranslate nohighlight">\(x_k = g(x_{k-1})\)</span> menuju ke <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Stopping criteria:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(|x_k - x_{k-1}| \leq \varepsilon\)</span> atau <span class="math notranslate nohighlight">\(|g(x_k) - x_{k-1}| \leq \varepsilon\)</span></p></li>
+<li><p>Iterasi maksimum terpenuhi.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">iterasi_fixed_point</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;     p</span><span class="se">\t\t</span><span class="s1">     g(p)      </span><span class="se">\t</span><span class="s1">residual&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">func</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
+            <span class="k">break</span>    
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)))</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">return</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="contoh-1">
+<h3>Contoh 1<a class="headerlink" href="#contoh-1" title="Permalink to this headline">¶</a></h3>
+<p>Carilah akar dari <span class="math notranslate nohighlight">\(f(x)=x−\cos{⁡(x)}\)</span> dengan akurasi 4-digit</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f$, $g$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="c1"># plt.ticklabel_format(axis=&#39;y&#39;, style=&#39;sci&#39;, scilimits=(-1,1))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;$f$&quot;</span><span class="p">,</span> <span class="s2">&quot;$g$&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Mencari_Akar_Persamaan_15_0.png" src="../_images/Mencari_Akar_Persamaan_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     g(p)      	residual
+------------------------------------------------
+  1.0000	    0.5403	    1.0000	
+  0.5403	    0.8576	    0.4597	
+  0.8576	    0.6543	    0.3173	
+  0.6543	    0.7935	    0.2033	
+  0.7935	    0.7014	    0.1392	
+  0.7014	    0.7640	    0.0921	
+  0.7640	    0.7221	    0.0626	
+  0.7221	    0.7504	    0.0419	
+  0.7504	    0.7314	    0.0283	
+  0.7314	    0.7442	    0.0190	
+  0.7442	    0.7356	    0.0128	
+  0.7356	    0.7414	    0.0086	
+  0.7414	    0.7375	    0.0058	
+  0.7375	    0.7401	    0.0039	
+  0.7401	    0.7384	    0.0026	
+  0.7384	    0.7396	    0.0018	
+  0.7396	    0.7388	    0.0012	
+  0.7388	    0.7393	    0.0008	
+  0.7393	    0.7389	    0.0005	
+  0.7389	    0.7392	    0.0004	
+  0.7392	    0.7390	    0.0002	
+  0.7390	    0.7391	    0.0002	
+  0.7391	    0.7391	    0.0001	
+  0.7391	    0.7391	    0.0001	
+  0.7391	    0.7391	    0.0001	
+  0.7391	    0.7391	    0.0000	
+  0.7391	    0.7391	    0.0000	
+  0.7391	    0.7391	    0.0000	
+  0.7391	    0.7391	    0.0000	
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7390822985224023
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="contoh-2">
+<h3>Contoh 2<a class="headerlink" href="#contoh-2" title="Permalink to this headline">¶</a></h3>
+<p>Selesaikan <span class="math notranslate nohighlight">\(f(x)=e^{-2x}\cdot (x-1)\)</span></p>
+<p>Kita pilih: <span class="math notranslate nohighlight">\(g(x) = e^{-2x}\cdot (x-1) + x\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f$, $g$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.99999</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.99999</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;$f$&quot;</span><span class="p">,</span> <span class="s2">&quot;$g$&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Mencari_Akar_Persamaan_18_0.png" src="../_images/Mencari_Akar_Persamaan_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span>
+<span class="n">sympy</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">g_simbol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+<span class="n">g_aksen</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g_simbol</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_aksen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2*(x - 1)*exp(-2*x) + 1 + exp(-2*x)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ksi</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g_aksen_eval</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_aksen</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g_aksen_eval</span><span class="p">(</span><span class="n">ksi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1353352832366128
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+<span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     g(p)      	residual
+------------------------------------------------
+ -1.0000	  -15.7781	    1.0000	
+-15.7781	-850035804379802.7500	   14.7781	
+-850035804379802.7500	      -inf	850035804379787.0000	
+    -inf	      -inf	       inf	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+    -inf	      -inf	       nan	
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3681/3427404320.py:1: RuntimeWarning: overflow encountered in exp
+  g = lambda x: np.exp(-2*x) * (x-1) + x
+/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3681/1089591089.py:7: RuntimeWarning: invalid value encountered in double_scalars
+  if (np.abs(p-p0) &lt; epsilon):
+/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3681/1089591089.py:9: RuntimeWarning: invalid value encountered in double_scalars
+  print(&#39;{:8.4f}\t{:10.4f}\t{:10.4f}\t&#39;.format(p, g(p), np.abs(p-p0)))
+</pre></div>
+</div>
+<img alt="../_images/Mencari_Akar_Persamaan_22_2.png" src="../_images/Mencari_Akar_Persamaan_22_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analisis-kekonvergenan-iterasi-fixed-point">
+<h3>Analisis Kekonvergenan Iterasi Fixed Point<a class="headerlink" href="#analisis-kekonvergenan-iterasi-fixed-point" title="Permalink to this headline">¶</a></h3>
+<p>Misalkan <span class="math notranslate nohighlight">\(p\)</span> adalah akar sedemikian sehingga <span class="math notranslate nohighlight">\(p=g(p)\)</span>. Kemudian, kita tulis iterasi fixed point <span class="math notranslate nohighlight">\(x_k = g(x_{k-1})\)</span> dan definisikan error</p>
+<div class="math notranslate nohighlight">
+\[e_{k-1} = x_{k-1} - p\]</div>
+<p>maka</p>
+<div class="math notranslate nohighlight">
+\[e_k = x_k - p = g(x_{k-1}) - p.\]</div>
+<p>Berdasarkan Teorema Nilai Rataan, maka didapat</p>
+<div class="math notranslate nohighlight">
+\[e_k = g'(\xi)(x_{k-1} - p), \hspace{10mm} \xi \in (x_{k-1}, p).\]</div>
+<p>Kemudian, kedua ruas kita mutlakan</p>
+<div class="math notranslate nohighlight">
+\[|e_k| = |g'(\xi)(x_{k-1} - p)|, \hspace{10mm} \xi \in (x_{k-1}, p).\]</div>
+<p>atau berdasarkan pertidaksamaan segitiga, maka dapat ditulis sebagai</p>
+<div class="math notranslate nohighlight">
+\[|e_k| \leq |g'(\xi)||(e_{k-1})|, \hspace{10mm} \xi \in (x_{k-1}, p).\]</div>
+<p><strong>Observasi</strong>:</p>
+<ul class="simple">
+<li><p>Jika <span class="math notranslate nohighlight">\(|g'(\xi)|&lt; 1\)</span>, maka error akan berkurang.</p></li>
+<li><p>Jika <span class="math notranslate nohighlight">\(|g'(\xi)|&gt; 1\)</span>, maka error akan bertambah.</p></li>
+</ul>
+<p>Dengan demikian, kita pilih <span class="math notranslate nohighlight">\(|g'(\xi)|&lt; 1\)</span> sedemikian sehingga</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[|e_k| \leq |g'(\xi)||(e_{k-1})|, \hspace{10mm} \xi \in (x_{k-1}, p).\]</div>
+</div></blockquote>
+<p>Dan dapat disimpulkan <strong>tingkat konvergensi</strong> dari iterasi fixed point adalah <strong>linear</strong>.</p>
+<p><strong>Remark</strong>. Jika diketahui untuk suatu <span class="math notranslate nohighlight">\(g(x)\)</span>, terdapat akar di <span class="math notranslate nohighlight">\(p\in[a,b]\)</span>, maka nilai <span class="math notranslate nohighlight">\(|g'(\xi)|\)</span> dapat kita tentukan dengan cara memilih interval <span class="math notranslate nohighlight">\(\xi \in [a,b]\)</span> sedemikian sehingga</p>
+<div class="math notranslate nohighlight">
+\[m = \max_{\xi \in [a,b]} |g'(\xi)|.\]</div>
+<p><strong>Perbaikan</strong></p>
+<p>Pilih: <span class="math notranslate nohighlight">\(g(x) = -e^{-2x}\cdot (x-1) + x\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">g_simbol</span> <span class="o">=</span> <span class="o">-</span><span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+<span class="n">g_aksen</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g_simbol</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_aksen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2*(1 - x)*exp(-2*x) + 1 - exp(-2*x)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ksi</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g_aksen_eval</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_aksen</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g_aksen_eval</span><span class="p">(</span><span class="n">ksi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8646647167633873
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+<span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     g(p)      	residual
+------------------------------------------------
+  1.0000	    1.0000	    1.0000	
+</pre></div>
+</div>
+<img alt="../_images/Mencari_Akar_Persamaan_27_1.png" src="../_images/Mencari_Akar_Persamaan_27_1.png" />
+</div>
+</div>
+<p>Dari <strong>Contoh 2</strong> maka dapat disimpulkan bahwa pemilihan <span class="math notranslate nohighlight">\(g(x)\)</span> berpengaruh terhadap solusi.</p>
+</div>
+<div class="section" id="contoh-3">
+<h3>Contoh 3:<a class="headerlink" href="#contoh-3" title="Permalink to this headline">¶</a></h3>
+<p>Diberikan <span class="math notranslate nohighlight">\(f(x) = x^3 + 4x^2 - 10\)</span> terdapat akar tunggal untuk <span class="math notranslate nohighlight">\(f(x) = 0\)</span> di <span class="math notranslate nohighlight">\([1,2]\)</span>. Kita dapat membuat beberapa bentuk <span class="math notranslate nohighlight">\(g(x)\)</span> menggunakan manipulasi aljabar dari persamaan <span class="math notranslate nohighlight">\(x^3 + 4x^2 - 10 = 0\)</span>. Sehingga kita mendapatkan</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{cc}
+  4x^2 &amp;=&amp; 10 - x^3\\
+  x^2 &amp;=&amp; \frac{1}{4}(10-x^3)\\
+  x &amp;=&amp; \pm \frac{1}{2} \sqrt{(10-x^3)}
+\end{array}.
+\end{split}\]</div>
+<p>Berikut adalah beberapa variasi bentuk <span class="math notranslate nohighlight">\(g(x)\)</span> yang mungkin untuk persamaan <span class="math notranslate nohighlight">\(x^3 + 4x^2 - 10 = 0\)</span>:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(g_1(x) = x - x^3 - 4x^2 + 10\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g_2(x) = \sqrt{ \frac{10}{x} - 4x}\)</span> (hati-hati!)</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_3(x) = \frac{1}{2} \sqrt{10-x^3}\)</span> (hati-hati!)</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_4(x) = \sqrt{\frac{10}{4+x}}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g_5(x) = x - \frac{x^3 + 4x^2 - 10}{3x^2 + 8x}\)</span></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">g1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="c1">#g2 = np.sqrt((10/4) - 4*x)</span>
+<span class="n">g3</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">g4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="n">x</span><span class="p">))</span>
+<span class="n">g5</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f$, $g$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="c1"># plt.ticklabel_format(axis=&#39;y&#39;, style=&#39;sci&#39;, scilimits=(-1,1))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;$f$&quot;</span><span class="p">,</span> <span class="s2">&quot;$g$&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Mencari_Akar_Persamaan_30_0.png" src="../_images/Mencari_Akar_Persamaan_30_0.png" />
+</div>
+</div>
+<p>Cek nilai <span class="math notranslate nohighlight">\(|g'(x)|\)</span> untuk masing-masing <span class="math notranslate nohighlight">\(g_1, g_2, g_3, g_4, g_5\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># g1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">g_simbol</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="n">g_aksen</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g_simbol</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_aksen</span><span class="p">)</span>
+
+<span class="n">ksi</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g_aksen_eval</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_aksen</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g_aksen_eval</span><span class="p">(</span><span class="n">ksi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3*x**2 - 8*x + 1
+10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># g3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">g_simbol</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">g_aksen</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g_simbol</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_aksen</span><span class="p">)</span>
+
+<span class="n">ksi</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g_aksen_eval</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_aksen</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g_aksen_eval</span><span class="p">(</span><span class="n">ksi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.75*x**2/sqrt(10 - x**3)
+0.25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># g4</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">g_simbol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="n">x</span><span class="p">))</span>
+<span class="n">g_aksen</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g_simbol</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_aksen</span><span class="p">)</span>
+
+<span class="n">ksi</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g_aksen_eval</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_aksen</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g_aksen_eval</span><span class="p">(</span><span class="n">ksi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-sqrt(10)*sqrt(1/(x + 4))/(2*(x + 4))
+0.1414213562373095
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># g5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">g_simbol</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<span class="n">g_aksen</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g_simbol</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_aksen</span><span class="p">)</span>
+
+<span class="n">ksi</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g_aksen_eval</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_aksen</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g_aksen_eval</span><span class="p">(</span><span class="n">ksi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-(-6*x - 8)*(x**3 + 4*x**2 - 10)/(3*x**2 + 8*x)**2
+0.5785123966942148
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hasil iterasi fixed point untuk <span class="math notranslate nohighlight">\(g_1, g_2, g_3, g_4, g_5\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="n">g3</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">g4</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="n">x</span><span class="p">))</span>
+<span class="n">g5</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     g(p)      	residual
+------------------------------------------------
+  6.0000	 -344.0000	    5.0000	
+-344.0000	40233906.0000	  350.0000	
+40233906.0000	-65129333514558058266624.0000	40234250.0000	
+-65129333514558058266624.0000	276267566256213176812460591377636390697531392742540224134413008502784.0000	65129333514558100209664.0000	
+276267566256213176812460591377636390697531392742540224134413008502784.0000	-21085781678484218373029710589143631921317875000289319058960190154839362740347082366049129581190236367284319210288916507514866804543042709750411734218555823868097599405777061398665815022859218193480385822720.0000	276267566256213176812460591377636390697531392742540224134413008502784.0000	
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">d8</span><span class="o">/</span><span class="n">_nrt2sy9567f87n08gxx0xc00000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_3681</span><span class="o">/</span><span class="mf">3585757220.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">g5</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nn">/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_3681/1089591089.py</span> in <span class="ni">iterasi_fixed_point</span><span class="nt">(func, p0, N, epsilon)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="k">break</span>
+<span class="ne">----&gt; </span><span class="mi">9</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)))</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="n">p0</span> <span class="o">=</span> <span class="n">p</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="k">return</span> <span class="n">p</span>
+
+<span class="ne">OverflowError</span>: int too large to convert to float
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     g(p)      	residual
+------------------------------------------------
+  1.4142	    1.3590	    0.4142	
+  1.3590	    1.3660	    0.0552	
+  1.3660	    1.3651	    0.0070	
+  1.3651	    1.3652	    0.0009	
+  1.3652	    1.3652	    0.0001	
+  1.3652	    1.3652	    0.0000	
+</pre></div>
+</div>
+<img alt="../_images/Mencari_Akar_Persamaan_38_1.png" src="../_images/Mencari_Akar_Persamaan_38_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     g(p)      	residual
+------------------------------------------------
+  1.4545	    1.3689	    0.4545	
+  1.3689	    1.3652	    0.0856	
+  1.3652	    1.3652	    0.0037	
+</pre></div>
+</div>
+<img alt="../_images/Mencari_Akar_Persamaan_39_1.png" src="../_images/Mencari_Akar_Persamaan_39_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="metode-newton">
+<h2>Metode Newton<a class="headerlink" href="#metode-newton" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Metode Newton atau yang lebih dikenal sebagai <strong>Newton-Raphson</strong> adalah salah satu metode yang <em>powerful</em> untuk menyelesaikan masalah pencarian akar pada persamaan nonlinear.</p></li>
+<li><p>Metode ini dibentuk dengan memanfaatkan polinomial Taylor order pertama untuk merepresentasikan suatu fungsi <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+</ul>
+<p><strong>Definisi</strong>: Diberikan <span class="math notranslate nohighlight">\(f\in C^2[a,b]\)</span> dan terdapat <span class="math notranslate nohighlight">\(p_0 \in [a,b]\)</span> sebagai nilai aproksimasi untuk akar <span class="math notranslate nohighlight">\(p\)</span> sedemikian sehingga <span class="math notranslate nohighlight">\(f'(p_0) \neq 0\)</span> dan <span class="math notranslate nohighlight">\(|p-p_0|\)</span> kecil. Perhatikan polinomial Taylor order pertama untuk suatu <span class="math notranslate nohighlight">\(f(x)\)</span> terhadap titik <span class="math notranslate nohighlight">\(p_0\)</span> dan <span class="math notranslate nohighlight">\(x = p\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+f(p) = f(p_0) + (p-p_0)f'(p_0)+\frac{(p-p_0)^2}{2}f''(\xi(p)), \hspace{10mm} \xi(p) \in (p,p_0).
+\]</div>
+<p>Karena <span class="math notranslate nohighlight">\(p\)</span> adalah akar maka <span class="math notranslate nohighlight">\(f(p)=0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+0 = f(p_0) + (p-p_0)f'(p_0)+\frac{(p-p_0)^2}{2}f''(\xi(p)), \hspace{10mm} \xi(p) \in (p,p_0).
+\]</div>
+<p>Karena diasumsikan <span class="math notranslate nohighlight">\(|p-p_0|\)</span> kecil, maka <span class="math notranslate nohighlight">\((p-p_0)^2 \approx 0\)</span>, sehingga</p>
+<div class="math notranslate nohighlight">
+\[
+0 = f(p_0) + (p-p_0)f'(p_0)
+\]</div>
+<p>atau</p>
+<div class="math notranslate nohighlight">
+\[
+p \approx p_0 - \frac{f(p_0)}{f'(p_0)} \equiv p_1.
+\]</div>
+<p>Dengan tebakan awal <span class="math notranslate nohighlight">\(p_0\)</span>, kita dapatkan suatu barisan solusi <span class="math notranslate nohighlight">\(\{p_k\}_{k=0}^{\infty}\)</span>, sehingga bentuk iteratif untuk metode Newton dapat kita tuliskan</p>
+<div class="math notranslate nohighlight">
+\[
+p_k = p_{k-1} - \frac{f(p_{k-1})}{f'(p_{k-1})},
+\]</div>
+<p>untuk <span class="math notranslate nohighlight">\(k = 1,2,\cdots\)</span>.</p>
+<p><strong>Stopping Criteria</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|p_k - p_{k-1}| &lt; \varepsilon\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{|p_k - p_{k-1}|}{|p_k|} &lt; \varepsilon\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|f(p_k)| &lt; \varepsilon\)</span></p></li>
+<li><p>iterasi maksimum sudah terpenuhi.</p></li>
+</ul>
+<div class="section" id="implementasi-metode-newton">
+<h3>Implementasi Metode Newton<a class="headerlink" href="#implementasi-metode-newton" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">dfunc</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;     p</span><span class="se">\t\t</span><span class="s1">     f(p)      </span><span class="se">\t</span><span class="s1">residual&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">func</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dfunc</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p0</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span><span class="o">/</span><span class="n">df</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
+            <span class="k">break</span>    
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="si">{:10.5E}</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)))</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">return</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Contoh 1</strong>:</p>
+<p>Tentukan akar dari fungsi <span class="math notranslate nohighlight">\(f(x)=\cos(x) - x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">g</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$f(x)$&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Mencari_Akar_Persamaan_45_0.png" src="../_images/Mencari_Akar_Persamaan_45_0.png" />
+</div>
+</div>
+<p>Implementasikan metode newton untuk mencari akar dari <span class="math notranslate nohighlight">\(f(x)\)</span>. Pertama, kita cari <span class="math notranslate nohighlight">\(f'(x)\)</span> terlebih dahulu</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f_simbol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span> 
+<span class="n">f_diff</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f_simbol</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">f_aksen</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_diff</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kemudian pilih tebakan awal, misal <span class="math notranslate nohighlight">\(p_0=1\)</span> dan cari akar menggunakan metode Newton</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f_aksen</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     f(p)      	residual
+------------------------------------------------
+  0.7504	   -0.0189	2.49636E-01	
+  0.7391	   -0.0000	1.12510E-02	
+  0.7391	   -0.0000	2.77575E-05	
+  0.7391	    0.0000	1.70123E-10	
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">g</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$f(x)$&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;p = </span><span class="si">{:4.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">),(</span><span class="n">p</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Mencari_Akar_Persamaan_50_0.png" src="../_images/Mencari_Akar_Persamaan_50_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analisis-kekonvergenan-metode-newton">
+<h3>Analisis Kekonvergenan Metode Newton<a class="headerlink" href="#analisis-kekonvergenan-metode-newton" title="Permalink to this headline">¶</a></h3>
+<p>Misalkan <span class="math notranslate nohighlight">\(p\)</span> adalah akar sehingga <span class="math notranslate nohighlight">\(f(p)=0\)</span> dan <span class="math notranslate nohighlight">\(p=g(p)\)</span>. Definisikan error</p>
+<div class="math notranslate nohighlight">
+\[ e_k = |p_k - p| = |g(p_{k-1}) - g(p)|.\]</div>
+<p>Berdasarkan Ekspansi Taylor untuk <span class="math notranslate nohighlight">\(g(p_{k-1})\)</span> di <span class="math notranslate nohighlight">\(x=p\)</span>, maka</p>
+<div class="math notranslate nohighlight">
+\[
+g(p_{k-1}) = g(p) + (p_{k-1} - p) g'(p) + \frac{(p_{k-1} - p)^2}{2}g''(\xi), \hspace{10mm} \xi \in (p_{k-1}, p).
+\]</div>
+<p>Pandang sebagai fixed point yang ‘optimal’</p>
+<div class="math notranslate nohighlight">
+\[x = g(x) = x-\frac{f(x)}{f'(x)}\]</div>
+<p>maka</p>
+<div class="math notranslate nohighlight">
+\[
+g'(x) = 1-\left[ \frac{f'(x)f'(x) - f(x) f''(x)}{(f'(x))^2} \right] = \frac{f(x)f''(x)}{(f'(x))^2}
+\]</div>
+<p>Jika kita asumsikan <span class="math notranslate nohighlight">\(p\)</span> adalah akar maka <span class="math notranslate nohighlight">\(f(p) = 0\)</span> sehingga</p>
+<div class="math notranslate nohighlight">
+\[
+g'(p) = \frac{f(p)f''(p)}{(f'(p))^2} = 0.
+\]</div>
+<p>Dengan demikian, karena <span class="math notranslate nohighlight">\(g'(p)=0\)</span> maka</p>
+<div class="math notranslate nohighlight">
+\[g(p_{k-1}) = g(p) +  \frac{(p_{k-1} - p)^2}{2}g''(\xi), \hspace{10mm} \xi \in (p_{k-1}, p).\]</div>
+<p>Subtitusikan bentuk <span class="math notranslate nohighlight">\(g(p_{k-1})\)</span> ke persamaan <span class="math notranslate nohighlight">\(e_k\)</span>, maka didapat</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{cc}
+e_k &amp;=&amp; |g(p_{k-1}) - g(p)| \\
+     &amp;=&amp; \left|g(p) +  \frac{(p_{k-1} - p)^2}{2}g''(\xi) - g(p) \right| \\
+     &amp;=&amp; \left|\frac{(p_{k-1} - p)^2}{2}g''(\xi) \right| \\
+     &amp;\leq&amp; \left|(p_{k-1} - p)^2 \right|  \left| \frac{g''(\xi)}{2} \right| \\
+     &amp;\leq&amp; \left|(e_{k-1})^2 \right|  \left| \frac{g''(\xi)}{2} \right| \\
+\end{array}
+\end{split}\]</div>
+<p>Jika kita misalkan <span class="math notranslate nohighlight">\(M = \left| \frac{g''(\xi)}{2} \right|\)</span> maka</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[
+e_k \leq M e_{k-1}^{2}
+\]</div>
+</div></blockquote>
+<p>Jadi, tingkat konvergensi dari metode Newton adalah <strong>kuadratik</strong>.</p>
+</div>
+</div>
+<div class="section" id="metode-secant">
+<h2>Metode Secant<a class="headerlink" href="#metode-secant" title="Permalink to this headline">¶</a></h2>
+<p>Kelemahan dari metode Newton adalah kita perlu untuk mencari turunan dari <span class="math notranslate nohighlight">\(f(x)\)</span>. Hal ini dapat menimbulkan masalah jika kita menemukan bentuk <span class="math notranslate nohighlight">\(f(x)\)</span> yang kompleks atau dengan kata lain turunannya sulit ditemukan. Berdasarkan definisi dari turunan,</p>
+<div class="math notranslate nohighlight">
+\[
+f'(x) = \lim_{\Delta x \rightarrow 0} \frac{f(x) - f(x + \Delta x)}{\Delta x}
+\]</div>
+<p>kita dapat mengaproksimasi turunan dari <span class="math notranslate nohighlight">\(f(x)\)</span> yaitu</p>
+<div class="math notranslate nohighlight">
+\[
+f'(x_k) \approx \frac{f(x_k) - f(x_{k-1})}{x_k - x_{k-1}}.
+\]</div>
+<p>Panggil skema iterasi Newton:</p>
+<div class="math notranslate nohighlight">
+\[
+p_k = p_{k-1} - \frac{f(p_{k-1})}{f'(p_{k-1})}
+\]</div>
+<p>Jika terdapat <span class="math notranslate nohighlight">\(p_{k-2}\)</span> yang dekat dengan <span class="math notranslate nohighlight">\(p_{k-1}\)</span>, maka</p>
+<div class="math notranslate nohighlight">
+\[
+f'(p_{k-1}) \approx \frac{f(p_{k-1}) - f(p_{k-2})}{p_{k-1} - p_{k-2}}.
+\]</div>
+<p>Kemudian subtitusikan <span class="math notranslate nohighlight">\(f'(p_{k-1})\)</span> ke skema iterasi Newton, maka kita dapatkan skema iterasi untuk <strong>Metode Secant</strong></p>
+<div class="math notranslate nohighlight">
+\[
+p_k = p_{k-1} - \frac{f(p_{k-1})(p_{k-1} - p_{k-2})}{f(p_{k-1}) - f(p_{k-2})}
+\]</div>
+<p><strong>Catatan</strong>: Metode Secant membutuhkan dua tebakan awal <span class="math notranslate nohighlight">\(p_0\)</span> dan <span class="math notranslate nohighlight">\(p_1\)</span> yang dekat.</p>
+<div class="section" id="implementasi-metode-secant">
+<h3>Implementasi Metode Secant<a class="headerlink" href="#implementasi-metode-secant" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">secant</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;     p</span><span class="se">\t\t</span><span class="s1">     f(p)      </span><span class="se">\t</span><span class="s1">residual&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="n">q0</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+    <span class="n">q1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">-</span> <span class="n">q1</span><span class="o">*</span><span class="p">(</span><span class="n">p1</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">q1</span><span class="o">-</span><span class="n">q0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
+            <span class="k">break</span>    
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="si">{:10.5E}</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)))</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">p1</span>
+        <span class="n">q0</span> <span class="o">=</span> <span class="n">q1</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="n">q1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Contoh 1</strong></p>
+<p>Tentukan akar dari fungsi <span class="math notranslate nohighlight">\(f(x)=\cos(x) - x\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">secant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     p		     f(p)      	residual
+------------------------------------------------
+  0.6851	    0.0893	6.85073E-01	
+  0.7363	    0.0047	2.63701E-01	
+  0.7391	   -0.0001	5.40460E-02	
+  0.7391	    0.0000	2.78611E-03	
+  0.7391	    0.0000	3.42287E-05	
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="analisis-kekonvergenan-metode-secant">
+<h3>Analisis Kekonvergenan Metode Secant<a class="headerlink" href="#analisis-kekonvergenan-metode-secant" title="Permalink to this headline">¶</a></h3>
+<p><strong>Klaim</strong>: Metode Secant memiliki tingkat konvergensi <strong>superlinear</strong> atau dapat ditulis</p>
+<div class="math notranslate nohighlight">
+\[e_{k} \leq e_{k-1}^{1.618}.\]</div>
+<p>Pembuktiannya dapat dilihat di <a class="reference external" href="https://nptel.ac.in/content/storage2/courses/122104019/numerical-analysis/Rathish-kumar/ratish-1/f3node5.html">sini</a>.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Bilangan_Floating_Point.html" title="previous page">Sistem Floating-Point</a>
+    <a class='right-next' id="next-link" href="Solusi_dari_SPL.html" title="next page">Solusi Numerik untuk Sistem Persamaan Linear</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Muhaza Liebenlito<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
