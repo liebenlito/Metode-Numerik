@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dekomposisi Matriks &#8212; Metode Numerik dengan Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Metode Iteratif untuk Menyelesaikan Sistem Persamaan Linear" href="Metode_Iteratif_untuk_Menyelesaikan_SPL.html" />
+    <link rel="prev" title="Solusi Numerik untuk Sistem Persamaan Linear" href="Solusi_dari_SPL.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Metode Numerik dengan Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Prakata
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Metode Numerik
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Bilangan_Floating_Point.html">
+   Sistem Floating-Point
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Mencari_Akar_Persamaan.html">
+   Mencari Akar Persamaan Non-Linear Satu Variabel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Solusi_dari_SPL.html">
+   Solusi Numerik untuk Sistem Persamaan Linear
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Dekomposisi Matriks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Metode_Iteratif_untuk_Menyelesaikan_SPL.html">
+   Metode Iteratif untuk Menyelesaikan Sistem Persamaan Linear
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interpolasi_%28spline%29.html">
+   Masalah di Interpolasi Polinomial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Metode_Deret_Taylor.html">
+   Solusi Numerik Persamaan Differensial Biasa
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Runge-Kutta.html">
+   Metode Runge-Kutta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="RK4_SPD.html">
+   Sistem Persamaan Differensial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="model_SIR.html">
+   Model SIR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   Referensi
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/Faktorisasi_Matriks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/liebenlito/Metode-Numerik"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/liebenlito/Metode-Numerik/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Faktorisasi_Matriks.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/liebenlito/Metode-Numerik/master?urlpath=tree/docs/notebooks/Faktorisasi_Matriks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dekomposisi-lu">
+   Dekomposisi LU
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#desain-algoritma-untuk-dekomposisi-lu">
+   Desain Algoritma untuk Dekomposisi LU
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contoh-1">
+     Contoh 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matriks-permutasi">
+   Matriks Permutasi
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="dekomposisi-matriks">
+<h1>Dekomposisi Matriks<a class="headerlink" href="#dekomposisi-matriks" title="Permalink to this headline">¶</a></h1>
+<p>Pada prinsipnya Eliminasi Gauss adalah teknik yang secara umum digunakan untuk menyelesaikan Sistem Persamaan Linear (SPL). Namun, waktu komputasi yang dibutuhkan oleh Eliminasi Gauss cenderung lama seiring bertambahnya ukuran matriks atau dapat dinotasikan <span class="math notranslate nohighlight">\(O(n^3 /3)\)</span> <span id="id1">[<a class="reference internal" href="../references.html#id2">Burden and Faires, 2010</a>]</span>. Hal ini banyak dipengaruhi oleh operasi aritmatika dari proses eliminasi yang terjadi di dalam Eliminasi Gauss. Dengan demikian, kita memerlukan suatu cara agar dapat meminimalkan waktu komputasi, salah satunya dengan melakukan <strong>dekomposisi matriks</strong>.</p>
+<div class="section" id="dekomposisi-lu">
+<h2>Dekomposisi LU<a class="headerlink" href="#dekomposisi-lu" title="Permalink to this headline">¶</a></h2>
+<p>Diberikan suatu SPL yang dapat dibentuk dalam bentuk matriks-vektor sebagai berikut</p>
+<div class="math notranslate nohighlight">
+\[
+A\vec{x} = \vec{b}
+\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> dan <span class="math notranslate nohighlight">\(\vec{x}, \vec{b} \in \mathbb{R}^n\)</span>. Kemudian untuk menyelesaikan SPL tersebut, kita gunakan eliminasi Gauss tanpa pivoting dan kita asumsikan juga bahwa elemen pivot di <span class="math notranslate nohighlight">\(A\)</span> tak nol seiring berjalannya proses eliminasi pada setiap iterasinya, atau dapat ditulis <span class="math notranslate nohighlight">\(a_{ii}^{(k)}\)</span>, untuk <span class="math notranslate nohighlight">\(k = 1,2, ..., n\)</span> dan <span class="math notranslate nohighlight">\(i = 1,2,...,n\)</span>. Proses eliminasi pada iterasi pertama dilakukan dengan cara</p>
+<div class="math notranslate nohighlight">
+\[
+(E_j - m_{j1}E_1) \rightarrow (E_j), \hspace{1.5em} m_{j1} = \frac{a_{j1}^{(1)}}{a_{11}^{(1)}}
+\]</div>
+<p>atau operasi ini dapat direpresentasikan sebagai <strong>matriks transformasi Gaussian pertama</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M^{(1)} = 
+\begin{bmatrix}
+1       &amp; 0 &amp; \cdots &amp; 0 \\
+-m_{21} &amp; 1 &amp;        &amp; 0 \\
+\vdots  &amp;   &amp; \ddots &amp; \vdots \\
+-m_{n1} &amp; 0 &amp; \cdots &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Sehingga, hasil perkalian matriks antara <span class="math notranslate nohighlight">\(M^{(1)}\)</span> dan <span class="math notranslate nohighlight">\(A^{(1)}\)</span> adalah</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(2)}\vec{x} = M^{(1)}A\vec{x} = M^{(1)} \vec{b} = \vec{b}^{(2)}.
+\]</div>
+<p>Secara umum, ketika kita melakukan perkalian matriks A dengan matriks transformasi Gaussian pada iterasi ke <span class="math notranslate nohighlight">\(k\)</span> akan menghasilkan</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(k+1)} \vec{x} = M^{(k)} A^{(k)} \vec{x} = M^{(k)} \cdots M^{(1)} A \vec{x} = M^{(k)}\vec{b}^{(k)} = \vec{b}^{(k+1)} = M^{(k)} \cdots M^{(1)} \vec{b}.
+\]</div>
+<p>Proses ini akan berhenti pada <span class="math notranslate nohighlight">\(A^{(n)} \vec{x} = \vec{b}^{(n)}\)</span>, dimana <span class="math notranslate nohighlight">\(A^{(n)}\)</span> menjadi matriks segitiga atas</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A^{(n)} = 
+\begin{bmatrix}
+a_{11}^{(1)} &amp; a_{12}^{(1)} &amp; \cdots &amp; a_{1n}^{(1)} \\
+0            &amp; a_{22}^{(2)} &amp;        &amp; a_{2n}^{(2)} \\
+\vdots       &amp;   &amp; \ddots &amp; \vdots \\
+0            &amp; 0 &amp; \cdots &amp; a_{nn}^{(n)} \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>diberikan oleh</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(n)} = M^{(n-1)} M^{(n-1)} \cdots M^{(1)} A.
+\]</div>
+<p>Kemudian kita panggil kembali</p>
+<div class="math notranslate nohighlight">
+\[
+A^{(k+1)} \vec{x} = M^{(k)} A^{(k)} \vec{x} = M^{(k)} \cdots M^{(1)} A \vec{x} = M^{(k)}\vec{b}^{(k)} = \vec{b}^{(k+1)}
+\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(M^{(k)}\)</span> dihasilkan dari operasi baris</p>
+<div class="math notranslate nohighlight">
+\[
+(E_j - m_{jk}E_k) \rightarrow (E_j), \hspace{1.5em} j=k+1, \cdots, n.
+\]</div>
+<p>Jika kita ingin mengembalikan nilai dari matriks <span class="math notranslate nohighlight">\(A^{(k+1)} ke A^{(k)}\)</span>, maka kita perlu operasi balikan</p>
+<div class="math notranslate nohighlight">
+\[
+(E_j + m_{jk}E_k) \rightarrow (E_j), \hspace{1.5em} j=k+1, \cdots, n,
+\]</div>
+<p>berarti ini sama saja mencari invers dari matriks <span class="math notranslate nohighlight">\(M\)</span>, <span class="math notranslate nohighlight">\([M^{(k)}]^{-1}\)</span>. Dengan demikian, jika kita teruskan operasi invers ini sampai dengan iterasi pertama, maka akan menghasilkan matriks <span class="math notranslate nohighlight">\(A\)</span>, dan operasi invers dari matriks <span class="math notranslate nohighlight">\(M\)</span> dapat kita tuliskan ekivalen dengan matriks segitiga bawah <span class="math notranslate nohighlight">\(L\)</span> atau dapat ditulis</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L = L^{(1)} L^{(2)} \cdots L^{(n-1)} = 
+\begin{bmatrix}
+1       &amp; 0 &amp; \cdots &amp; 0 \\
+m_{21} &amp; 1 &amp;        &amp; 0 \\
+\vdots  &amp;   &amp; \ddots &amp; \vdots \\
+m_{n1} &amp; \cdots &amp; m_{n,n-1} &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Jadi, <span class="math notranslate nohighlight">\(A\)</span> dapat kita dekomposisi menjadi hasil kali dari matriks segitiga bawah <span class="math notranslate nohighlight">\(L\)</span> dan matriks segitiga atas <span class="math notranslate nohighlight">\(U\)</span>, atau dapat ditulis</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{lll}
+LU &amp;=&amp; L^{(1)}L^{(2)} \cdots L^{(n-3)} L^{(n-2)} L^{(n-1)} . M^{(n-1)} M^{(n-2)} M^{(n-3)} \cdots M^{(2)} M^{(1)} A \\
+&amp;=&amp; [M^{(1)}]^{-1} [M^{(2)}]^{-1} \cdots [M^{(n-2)}]^{-1} [M^{(n-1)}]^{-1} . M^{(n-1)} M^{(n-2)} M^{(n-3)} \cdots M^{(2)} M^{(1)} A \\
+&amp;=&amp; A.
+\end{array}
+\end{split}\]</div>
+<div class="admonition-teorema admonition">
+<p class="admonition-title">Teorema</p>
+<p>Jika Eliminasi Gauss tanpa penukaran baris dapat digunakan untuk menyelesaikan <span class="math notranslate nohighlight">\(A\vec{x} = \vec{b}\)</span>, maka matriks <span class="math notranslate nohighlight">\(A\)</span> dapat didekomposisi ke dalam perkalian matriks antara matriks segitiga bawah <span class="math notranslate nohighlight">\(L\)</span> dan matriks segitiga atas <span class="math notranslate nohighlight">\(U\)</span>, <span class="math notranslate nohighlight">\(A = LU\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+U = 
+\begin{bmatrix}
+a_{11}^{(1)} &amp; a_{12}^{(1)} &amp; \cdots &amp; a_{1n}^{(1)} \\
+0            &amp; a_{22}^{(2)} &amp;        &amp; a_{2n}^{(2)} \\
+\vdots       &amp;   &amp; \ddots &amp; \vdots \\
+0            &amp; 0 &amp; \cdots &amp; a_{nn}^{(n)} \\
+\end{bmatrix}
+, L = 
+\begin{bmatrix}
+1       &amp; 0 &amp; \cdots &amp; 0 \\
+m_{21} &amp; 1 &amp;        &amp; 0 \\
+\vdots  &amp;   &amp; \ddots &amp; \vdots \\
+m_{n1} &amp; \cdots &amp; m_{n,n-1} &amp; 1 \\
+\end{bmatrix}
+,
+\end{split}\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(m_{ji} = \frac{a_{ji}^{(i)}}{a_{ii}^{(i)}}\)</span>, untuk <span class="math notranslate nohighlight">\(i,j = 1,2,\cdots, n\)</span>.</p>
+</div>
+</div>
+<div class="section" id="desain-algoritma-untuk-dekomposisi-lu">
+<h2>Desain Algoritma untuk Dekomposisi LU<a class="headerlink" href="#desain-algoritma-untuk-dekomposisi-lu" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Algoritma</span><span class="p">:</span> <span class="n">Eliminasi_Gauss_Scaled_Pivoting</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">INPUT</span><span class="p">:</span> <span class="n">Matriks</span> <span class="n">A</span> 
+
+<span class="n">Inisialisasi</span><span class="p">:</span> <span class="n">L</span> <span class="o">=</span> <span class="n">Matriks</span> <span class="n">Identitas</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">Matriks</span> <span class="n">nol</span>
+<span class="n">Lakukan</span> <span class="n">Eliminasi</span> <span class="n">Maju</span> <span class="n">untuk</span> <span class="n">mendapatkan</span> <span class="n">matriks</span> <span class="n">segitiga</span> <span class="n">atas</span> <span class="n">U</span><span class="p">,</span> <span class="n">bersamaan</span> <span class="n">dengan</span> <span class="n">itu</span> <span class="n">kita</span> <span class="n">dapatkan</span> <span class="n">juga</span> <span class="n">matriks</span> <span class="n">segitiga</span> <span class="n">bawah</span> <span class="n">L</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="n">n</span>
+        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="n">to</span> <span class="n">n</span>
+            <span class="n">faktor</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">faktor</span>
+            <span class="p">(</span><span class="n">E_j</span> <span class="o">-</span> <span class="n">faktor</span><span class="o">*</span><span class="n">E_i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">E_j</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">menghasilkan</span> <span class="n">U</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dekomposisiLU</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">faktor</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">faktor</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">faktor</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="n">U</span> <span class="o">=</span> <span class="n">A</span>
+    
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span><span class="n">U</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="contoh-1">
+<h3>Contoh 1<a class="headerlink" href="#contoh-1" title="Permalink to this headline">¶</a></h3>
+<p>Diberikan SPL</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">subtitusi_maju</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">L_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+
+    <span class="c1"># Lakukan subtitutsi mundur</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,:</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">i</span><span class="p">]))</span> <span class="o">/</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">subtitusi_mundur</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    
+    <span class="c1"># Lakukan subtitutsi mundur</span>
+    <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">U</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">:],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">:]))</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">dekomposisiLU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">subtitusi_maju</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">subtitusi_mundur</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.,  2.,  0.,  1.])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="matriks-permutasi">
+<h2>Matriks Permutasi<a class="headerlink" href="#matriks-permutasi" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dekomposisi_plu</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">U</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> 
+            <span class="k">if</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">):</span>
+                <span class="k">break</span>
+            <span class="n">U</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">]]</span>
+            <span class="n">P</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">]]</span>
+            
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">factor</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">factor</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+    <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">dekomposisi_plu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">subtitusi_maju</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">subtitusi_mundur</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1e-17</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 1.])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Solusi_dari_SPL.html" title="previous page">Solusi Numerik untuk Sistem Persamaan Linear</a>
+    <a class='right-next' id="next-link" href="Metode_Iteratif_untuk_Menyelesaikan_SPL.html" title="next page">Metode Iteratif untuk Menyelesaikan Sistem Persamaan Linear</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Muhaza Liebenlito<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
