@@ -2,9 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: README
 chapters:
-- file: README.md
 - file: notebooks/Bilangan_Floating_Point.ipynb
 - file: notebooks/Mencari_Akar_Persamaan.ipynb
 - file: notebooks/Solusi_dari_SPL.ipynb
