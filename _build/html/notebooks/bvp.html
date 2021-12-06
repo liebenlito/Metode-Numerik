@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Model SIR &#8212; Metode Numerik dengan Python</title>
+    <title>Solusi Numerik untuk Masalah Syarat Batas &#8212; Metode Numerik dengan Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,8 +53,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Referensi" href="../references.html" />
-    <link rel="prev" title="Sistem Persamaan Differensial" href="RK4_SPD.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -91,7 +89,7 @@
   </a>
  </li>
 </ul>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Bilangan_Floating_Point.html">
    Sistem Floating-Point
@@ -137,8 +135,8 @@
    Sistem Persamaan Differensial
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="model_SIR.html">
    Model SIR
   </a>
  </li>
@@ -188,7 +186,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/model_SIR.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/bvp.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -208,7 +206,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/liebenlito/Metode-Numerik/issues/new?title=Issue%20on%20page%20%2Fnotebooks/model_SIR.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/liebenlito/Metode-Numerik/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bvp.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -224,23 +222,6 @@
 
             <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/liebenlito/Metode-Numerik/master?urlpath=tree/docs/notebooks/model_SIR.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
 
         <!-- Table of contents -->
@@ -254,17 +235,14 @@
         
               <div>
                 
-  <p><a href="https://colab.research.google.com/github/liebenlito/Metode-Numerik/blob/main/model_SIR.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<div class="section" id="model-sir">
-<h1>Model SIR<a class="headerlink" href="#model-sir" title="Permalink to this headline">¶</a></h1>
-<p>Misalkan di dalam suatu pengamatan pada waktu ke <span class="math notranslate nohighlight">\(t\)</span> di dalam populasi <strong>tertutup</strong>, terdapat subpopulasi yang rentan (Susceptible, <span class="math notranslate nohighlight">\(S\)</span>), subpopulasi yang terjangkit penyakit (Infection, <span class="math notranslate nohighlight">\(I\)</span>), dan subpopulasi yang sembuh (Recovery, <span class="math notranslate nohighlight">\(R\)</span>). Model populasi ini dinamakan model <span class="math notranslate nohighlight">\(SIR\)</span>. Model SIR memiliki asumsi-asumsi sebagai berikut:</p>
-<ol class="simple">
-<li><p>Individu yang sembuh mempunyai kekebalan terhadap penyakit tersebut (tidak bisa menjadi rentan lagi).</p></li>
-<li><p>Penyakit tidak fatal (tidak menyebabkan kematian).</p></li>
-<li><p>Masa inkubasi sangat singkat. Masa inkubasi adalah masa antara mulai terjadinya infeksi sampai dengan tampaknya gejala.</p></li>
-<li><p>Laju kenaikan proporsi (jumlah individu) dari kelas terjangkit dan menularkan sebanding dengan proporsi (jumlah individu) dari kelas rentan dan kelas terjangkit. Proporsi (jumlah individu) kelas rentan minimum dengan laju yang sama, yaitu <span class="math notranslate nohighlight">\(\beta SI\)</span>.</p></li>
-<li><p>Laju kenaikan proporsi (jumlah individu) kelas sembuh sebanding dengan proporsi ( jumlah individu) dari kelas terjangkit dan menularkan, yaitu <span class="math notranslate nohighlight">\(\alpha I\)</span>.</p></li>
-</ol>
+  <div class="section" id="solusi-numerik-untuk-masalah-syarat-batas">
+<h1>Solusi Numerik untuk Masalah Syarat Batas<a class="headerlink" href="#solusi-numerik-untuk-masalah-syarat-batas" title="Permalink to this headline">¶</a></h1>
+<p>Bentuk umum</p>
+<div class="math notranslate nohighlight">
+\[
+y'' = f(x, y, y'), \hspace{1.5em} a \leq x \leq b, \hspace{1.5em} y(a) = \alpha \text{ dan } y(b) = \beta.
+\]</div>
+<p>Berdasarkan linearitas masalahnya</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -292,8 +270,6 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="RK4_SPD.html" title="previous page">Sistem Persamaan Differensial</a>
-    <a class='right-next' id="next-link" href="../references.html" title="next page">Referensi</a>
 
         </div>
         

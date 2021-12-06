@@ -86,17 +86,12 @@
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Prakata
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
   <a class="reference internal" href="../README.html">
    Metode Numerik
   </a>
  </li>
+</ul>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Bilangan_Floating_Point.html">
    Sistem Floating-Point
@@ -276,6 +271,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matriks-permutasi">
    Matriks Permutasi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-value-decomposition-svd">
+   Singular Value Decomposition (SVD)
   </a>
  </li>
 </ul>
@@ -573,6 +573,22 @@ m_{n1} &amp; \cdots &amp; m_{n,n-1} &amp; 1 \\
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="singular-value-decomposition-svd">
+<h2>Singular Value Decomposition (SVD)<a class="headerlink" href="#singular-value-decomposition-svd" title="Permalink to this headline">¶</a></h2>
+<p>Diberikan suatu matriks <span class="math notranslate nohighlight">\(A \in \mathbb{C}^{m \times n}\)</span>. Matriks <span class="math notranslate nohighlight">\(A\)</span> dapat didekomposisi ke dalam bentuk</p>
+<div class="math notranslate nohighlight">
+\[
+A = USV^t,
+\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(U \in \mathbb{C}^{m \times m}\)</span> dan <span class="math notranslate nohighlight">\(V \in \mathbb{C}^{n \times n}\)</span> adalah matriks orthogonal, dan <span class="math notranslate nohighlight">\(S \in \mathbb{R}^{m \times n}\)</span> adalah matriks diagonal yang tak nol. Biasanya SVD dipakai untuk mendekomposisi matriks <span class="math notranslate nohighlight">\(A\)</span> ketika <span class="math notranslate nohighlight">\(m \gg n\)</span>, oleh karena itu kita asumsikan bahwa matriks <span class="math notranslate nohighlight">\(A\)</span> memiliki ukuran <span class="math notranslate nohighlight">\(m \gg n\)</span>.</p>
+<div class="admonition-definisi-1 admonition">
+<p class="admonition-title">Definisi 1</p>
+<p>Misalkan <span class="math notranslate nohighlight">\(A\)</span> adalah matriks <span class="math notranslate nohighlight">\(m \times n\)</span>.
+(i)  Rank dari <span class="math notranslate nohighlight">\(A\)</span> dinotasikan <span class="math notranslate nohighlight">\(Rank(A)\)</span> adalah banyaknya baris yang bebas linear dari <span class="math notranslate nohighlight">\(A\)</span>.
+(ii) Nullity dari <span class="math notranslate nohighlight">\(A\)</span> dinotasikan <span class="math notranslate nohighlight">\(Nullity(A)\)</span>, adalah <span class="math notranslate nohighlight">\(n - Rank(A)\)</span>, yaitu himpunan terbesar dari vektor bebas linear di <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> untuk <span class="math notranslate nohighlight">\(A\vec{v} = \vec{0}\)</span></p>
+</div>
+<p>Rank dan Nullity dari suatu matriks merupakan hal penting untuk mengetahui karakteristik dari matriks. Misalkan ketika matriksnya persegi maka kita dapat mengetahui apakah matriks tersebut memiliki invers atau tidak, dengan cara melihat apakah Nullity-nya 0 dan Rank-nya memiliki ukuran yang sama dari matriks tersebut.</p>
 </div>
 </div>
 
