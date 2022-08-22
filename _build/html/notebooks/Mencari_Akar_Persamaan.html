@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mencari Akar Persamaan Non-Linear Satu Variabel &#8212; Metode Numerik dengan Python</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -41,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -56,7 +56,10 @@
     <link rel="next" title="Solusi Numerik untuk Sistem Persamaan Linear" href="Solusi_dari_SPL.html" />
     <link rel="prev" title="Sistem Floating-Point" href="Bilangan_Floating_Point.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -73,6 +76,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/logo.png" class="logo" alt="logo">
       
       
@@ -82,7 +89,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -118,6 +125,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="eigenvalue.html">
+   Nilai Eigen dan Vektor Eigen
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="interpolasi_%28spline%29.html">
    Masalah di Interpolasi Polinomial
   </a>
@@ -140,6 +152,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="model_SIR.html">
    Model SIR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="python_programming.html">
+   Pemrograman dengan Python
   </a>
  </li>
  <li class="toctree-l1">
@@ -193,7 +210,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -244,12 +261,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#metode-bisection">
@@ -332,7 +349,98 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Mencari Akar Persamaan Non-Linear Satu Variabel</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metode-bisection">
+   Metode Bisection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-metode-bisection">
+     Analisis Kekonvergenan Metode Bisection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterasi-fixed-point">
+   Iterasi Fixed Point
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contoh-1">
+     Contoh 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contoh-2">
+     Contoh 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-iterasi-fixed-point">
+     Analisis Kekonvergenan Iterasi Fixed Point
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contoh-3">
+     Contoh 3:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metode-newton">
+   Metode Newton
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementasi-metode-newton">
+     Implementasi Metode Newton
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-metode-newton">
+     Analisis Kekonvergenan Metode Newton
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metode-secant">
+   Metode Secant
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementasi-metode-secant">
+     Implementasi Metode Secant
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analisis-kekonvergenan-metode-secant">
+     Analisis Kekonvergenan Metode Secant
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="section" id="mencari-akar-persamaan-non-linear-satu-variabel">
@@ -798,11 +906,11 @@ $<span class="math notranslate nohighlight">\(
     -inf	      -inf	       nan	
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4050/3427404320.py:1: RuntimeWarning: overflow encountered in exp
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_2476/3427404320.py:1: RuntimeWarning: overflow encountered in exp
   g = lambda x: np.exp(-2*x) * (x-1) + x
-/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4050/1089591089.py:7: RuntimeWarning: invalid value encountered in double_scalars
+/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_2476/1089591089.py:7: RuntimeWarning: invalid value encountered in double_scalars
   if (np.abs(p-p0) &lt; epsilon):
-/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4050/1089591089.py:9: RuntimeWarning: invalid value encountered in double_scalars
+/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_2476/1089591089.py:9: RuntimeWarning: invalid value encountered in double_scalars
   print(&#39;{:8.4f}\t{:10.4f}\t{:10.4f}\t&#39;.format(p, g(p), np.abs(p-p0)))
 </pre></div>
 </div>
@@ -1043,17 +1151,17 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OverflowError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">d8</span><span class="o">/</span><span class="n">_nrt2sy9567f87n08gxx0xc00000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_4050</span><span class="o">/</span><span class="mf">3585757220.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">g4</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="n">x</span><span class="p">))</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">g5</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
 <span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">iterasi_fixed_point</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="nn">/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4050/1089591089.py</span> in <span class="ni">iterasi_fixed_point</span><span class="nt">(func, p0, N, epsilon)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="k">break</span>
-<span class="ne">----&gt; </span><span class="mi">9</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)))</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="n">p0</span> <span class="o">=</span> <span class="n">p</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="k">return</span> <span class="n">p</span>
+<span class="nn">Input In [7],</span> in <span class="ni">iterasi_fixed_point</span><span class="nt">(func, p0, N, epsilon)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="k">break</span>    
+<span class="ne">----&gt; </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="si">{:10.4f}</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)))</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">p0</span> <span class="o">=</span> <span class="n">p</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">return</span> <span class="n">p</span>
 
 <span class="ne">OverflowError</span>: int too large to convert to float
 </pre></div>
@@ -1382,34 +1490,42 @@ p_k = p_{k-1} - \frac{f(p_{k-1})(p_{k-1} - p_{k-2})}{f(p_{k-1}) - f(p_{k-2})}
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Bilangan_Floating_Point.html" title="previous page">Sistem Floating-Point</a>
-    <a class='right-next' id="next-link" href="Solusi_dari_SPL.html" title="next page">Solusi Numerik untuk Sistem Persamaan Linear</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Bilangan_Floating_Point.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Sistem Floating-Point</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="Solusi_dari_SPL.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Solusi Numerik untuk Sistem Persamaan Linear</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Muhaza Liebenlito<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Muhaza Liebenlito<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

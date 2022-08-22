@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interpolasi &#8212; Metode Numerik dengan Python</title>
+    <title>Nilai Eigen dan Vektor Eigen &#8212; Metode Numerik dengan Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -51,6 +53,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Masalah di Interpolasi Polinomial" href="interpolasi_%28spline%29.html" />
+    <link rel="prev" title="Metode Iteratif untuk Menyelesaikan Sistem Persamaan Linear" href="Metode_Iteratif_untuk_Menyelesaikan_SPL.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -94,7 +98,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Bilangan_Floating_Point.html">
    Sistem Floating-Point
@@ -120,8 +124,8 @@
    Metode Iteratif untuk Menyelesaikan Sistem Persamaan Linear
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="eigenvalue.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Nilai Eigen dan Vektor Eigen
   </a>
  </li>
@@ -201,7 +205,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/interpolasi.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/eigenvalue.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -221,7 +225,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/liebenlito/Metode-Numerik/issues/new?title=Issue%20on%20page%20%2Fnotebooks/interpolasi.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/liebenlito/Metode-Numerik/issues/new?title=Issue%20on%20page%20%2Fnotebooks/eigenvalue.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -237,11 +241,41 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/liebenlito/Metode-Numerik/master?urlpath=tree/docs/notebooks/eigenvalue.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#review-aljabar-linear">
+   Review Aljabar Linear
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -249,19 +283,59 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Interpolasi</h1>
+                <h1>Nilai Eigen dan Vektor Eigen</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#review-aljabar-linear">
+   Review Aljabar Linear
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <div class="section" id="interpolasi">
-<h1>Interpolasi<a class="headerlink" href="#interpolasi" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="nilai-eigen-dan-vektor-eigen">
+<h1>Nilai Eigen dan Vektor Eigen<a class="headerlink" href="#nilai-eigen-dan-vektor-eigen" title="Permalink to this headline">¶</a></h1>
+<p>Secara komputasi, mencari nilai eigen dan vektor eigen dari suatu matriks <span class="math notranslate nohighlight">\(n \times n\)</span> memerlukan waktu eksekusi yang lama. Misalkan kita bangun persamaan karakteristik polinomial</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda) = \text{det}(A-\lambda I)
+\]</div>
+<p>dimana <span class="math notranslate nohighlight">\(A\)</span> adalah matriks <span class="math notranslate nohighlight">\(n \times n\)</span>, <span class="math notranslate nohighlight">\(I\)</span> adalah matriks identitas, dan <span class="math notranslate nohighlight">\(\lambda\)</span> adalah nilai eigen.</p>
+<div class="section" id="review-aljabar-linear">
+<h2>Review Aljabar Linear<a class="headerlink" href="#review-aljabar-linear" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-definisi admonition">
+<p class="admonition-title">Definisi</p>
+<p>Misalkan \lbrace \textbf{v}^{(1)}, \textbf{v}^{(2)}, \cdots, \textbf{v}^{(k)}\rbrace adalah himpunan vektor. Himpunan tersebut dikatakan <strong>linearly independent</strong> jika</p>
+<div class="math notranslate nohighlight">
+\[
+\textbf{0} = \alpha_1 \textbf{v}^{(1)} + \alpha_2 \textbf{v}^{(2)} + \cdots + \alpha_k \textbf{v}^{(k)}
+\]</div>
+<p>maka <span class="math notranslate nohighlight">\(\alpha_i = 0\)</span> untuk setiap <span class="math notranslate nohighlight">\(i = 0, 1, /cdots, k\)</span>. Begitu pula sebaliknya, maka himpunan vektornya disebut <strong>linearly dependent</strong>.</p>
+</div>
+<div class="admonition-teorema admonition">
+<p class="admonition-title">Teorema</p>
+<p>Diberikan \lbrace \textbf{v}^{(1)}, \textbf{v}^{(2)}, \cdots, \textbf{v}^{(k)}\rbrace adalah himpunan vektor yang linearly independent di <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>. Maka untuk setiap vektor <span class="math notranslate nohighlight">\(\textbf{x} \in \mathbb{R}^n\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\textbf{0} = \alpha_1 \textbf{v}^{(1)} + \alpha_2 \textbf{v}^{(2)} + \cdots + \alpha_k \textbf{v}^{(k)}
+\]</div>
+<p>maka <span class="math notranslate nohighlight">\(\alpha_i = 0\)</span> untuk setiap <span class="math notranslate nohighlight">\(i = 0, 1, /cdots, k\)</span>. Begitu pula sebaliknya, maka himpunan vektornya disebut <strong>linearly dependent</strong>.</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -288,7 +362,21 @@
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Metode_Iteratif_untuk_Menyelesaikan_SPL.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Metode Iteratif untuk Menyelesaikan Sistem Persamaan Linear</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="interpolasi_%28spline%29.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Masalah di Interpolasi Polinomial</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>

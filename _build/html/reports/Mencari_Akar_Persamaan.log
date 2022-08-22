@@ -1,7 +1,7 @@
 Traceback (most recent call last):
   File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
   File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
@@ -9,11 +9,11 @@ Traceback (most recent call last):
     return loop.run_until_complete(coro)
   File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
     return future.result()
-  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/homebrew/Caskroom/miniforge/base/envs/iben_env/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -27,17 +27,17 @@ iterasi_fixed_point(g1, 1)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOverflowError[0m                             Traceback (most recent call last)
-[0;32m/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4050/3585757220.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      4[0m [0mg5[0m [0;34m=[0m [0;32mlambda[0m [0mx[0m[0;34m:[0m [0mx[0m [0;34m-[0m [0;34m([0m[0;34m([0m[0mx[0m[0;34m**[0m[0;36m3[0m [0;34m+[0m [0;36m4[0m[0;34m*[0m[0mx[0m[0;34m**[0m[0;36m2[0m [0;34m-[0m [0;36m10[0m[0;34m)[0m[0;34m/[0m[0;34m([0m[0;36m3[0m[0;34m*[0m[0mx[0m[0;34m**[0m[0;36m2[0m [0;34m+[0m [0;36m8[0m[0;34m*[0m[0mx[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0;34m[0m[0m
-[0;32m----> 6[0;31m [0miterasi_fixed_point[0m[0;34m([0m[0mg1[0m[0;34m,[0m [0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m/var/folders/d8/_nrt2sy9567f87n08gxx0xc00000gn/T/ipykernel_4050/1089591089.py[0m in [0;36miterasi_fixed_point[0;34m(func, p0, N, epsilon)[0m
-[1;32m      7[0m         [0;32mif[0m [0;34m([0m[0mnp[0m[0;34m.[0m[0mabs[0m[0;34m([0m[0mp[0m[0;34m-[0m[0mp0[0m[0;34m)[0m [0;34m<[0m [0mepsilon[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      8[0m             [0;32mbreak[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 9[0;31m         [0mprint[0m[0;34m([0m[0;34m'{:8.4f}\t{:10.4f}\t{:10.4f}\t'[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0mp[0m[0;34m,[0m [0mg[0m[0;34m([0m[0mp[0m[0;34m)[0m[0;34m,[0m [0mnp[0m[0;34m.[0m[0mabs[0m[0;34m([0m[0mp[0m[0;34m-[0m[0mp0[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     10[0m         [0mp0[0m [0;34m=[0m [0mp[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     11[0m     [0;32mreturn[0m [0mp[0m[0;34m[0m[0;34m[0m[0m
+Input [0;32mIn [23][0m, in [0;36m<module>[0;34m[0m
+[1;32m      3[0m g4 [38;5;241m=[39m [38;5;28;01mlambda[39;00m x: np[38;5;241m.[39msqrt([38;5;241m10[39m[38;5;241m/[39m([38;5;241m4[39m[38;5;241m+[39mx))
+[1;32m      4[0m g5 [38;5;241m=[39m [38;5;28;01mlambda[39;00m x: x [38;5;241m-[39m ((x[38;5;241m*[39m[38;5;241m*[39m[38;5;241m3[39m [38;5;241m+[39m [38;5;241m4[39m[38;5;241m*[39mx[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m [38;5;241m-[39m [38;5;241m10[39m)[38;5;241m/[39m([38;5;241m3[39m[38;5;241m*[39mx[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m [38;5;241m+[39m [38;5;241m8[39m[38;5;241m*[39mx))
+[0;32m----> 6[0m [43miterasi_fixed_point[49m[43m([49m[43mg1[49m[43m,[49m[43m [49m[38;5;241;43m1[39;49m[43m)[49m
+
+Input [0;32mIn [7][0m, in [0;36miterasi_fixed_point[0;34m(func, p0, N, epsilon)[0m
+[1;32m      7[0m     [38;5;28;01mif[39;00m (np[38;5;241m.[39mabs(p[38;5;241m-[39mp0) [38;5;241m<[39m epsilon):
+[1;32m      8[0m         [38;5;28;01mbreak[39;00m    
+[0;32m----> 9[0m     [38;5;28mprint[39m([38;5;124;43m'[39;49m[38;5;132;43;01m{:8.4f}[39;49;00m[38;5;130;43;01m\t[39;49;00m[38;5;132;43;01m{:10.4f}[39;49;00m[38;5;130;43;01m\t[39;49;00m[38;5;132;43;01m{:10.4f}[39;49;00m[38;5;130;43;01m\t[39;49;00m[38;5;124;43m'[39;49m[38;5;241;43m.[39;49m[43mformat[49m[43m([49m[43mp[49m[43m,[49m[43m [49m[43mg[49m[43m([49m[43mp[49m[43m)[49m[43m,[49m[43m [49m[43mnp[49m[38;5;241;43m.[39;49m[43mabs[49m[43m([49m[43mp[49m[38;5;241;43m-[39;49m[43mp0[49m[43m)[49m[43m)[49m)
+[1;32m     10[0m     p0 [38;5;241m=[39m p
+[1;32m     11[0m [38;5;28;01mreturn[39;00m p
 
 [0;31mOverflowError[0m: int too large to convert to float
 OverflowError: int too large to convert to float
