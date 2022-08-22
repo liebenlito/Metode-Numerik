@@ -9,9 +9,11 @@ chapters:
 - file: notebooks/Solusi_dari_SPL.ipynb
 - file: notebooks/Faktorisasi_Matriks.ipynb
 - file: notebooks/Metode_Iteratif_untuk_Menyelesaikan_SPL.ipynb
+- file: notebooks/eigenvalue.ipynb
 - file: notebooks/interpolasi_(spline).ipynb
 - file: notebooks/Metode_Deret_Taylor.ipynb
 - file: notebooks/Runge-Kutta.ipynb
 - file: notebooks/RK4_SPD.ipynb
 - file: notebooks/model_SIR.ipynb
+- file: notebooks/python_programming.ipynb
 - file: references.md
