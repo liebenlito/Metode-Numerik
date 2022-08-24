@@ -4,6 +4,7 @@
 format: jb-book
 root: README
 chapters:
+- file: test.myst.md
 - file: notebooks/Bilangan_Floating_Point.ipynb
 - file: notebooks/Mencari_Akar_Persamaan.ipynb
 - file: notebooks/Solusi_dari_SPL.ipynb
